@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "16592e52-c0d9-4854-b182-8fb58d87abea",
+		"_postman_id": "28e475fb-907c-45d7-984c-38da53590381",
 		"name": "Санек Красавчик",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Регистрауия юзера",
+			"name": "Регистрация юзера",
 			"event": [
 				{
 					"listen": "prerequest",
