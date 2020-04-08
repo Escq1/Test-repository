@@ -1,0 +1,272 @@
+{
+	"info": {
+		"_postman_id": "16592e52-c0d9-4854-b182-8fb58d87abea",
+		"name": "Санек Красавчик",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Регистрауия юзера",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c46b71b7-59b1-4784-ab06-7de9d64fac27",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "dac772be-4dd5-4ac8-b83f-f6e3775e30b8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"Response type is ok\"] = data.type == \"ok\";"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "{{Email}}",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Санек Красавчик",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://users.bugred.ru/tasks/rest/doregister",
+					"protocol": "http",
+					"host": [
+						"users",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"tasks",
+						"rest",
+						"doregister"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Санек теперь Юзер",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4986adf1-9422-4d94-be8a-0ad88d1e133d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"{{Email}}\",\r\n  \"name\": \"КРАСАВАСАНЯ {{Email}}\",\r\n  \"tasks\": [12],\r\n  \"companies\": [36,37],\r\n  \"hobby\":\"Стрельба из лука, Настолки\",\r\n  \"adres\":\"адрес 1\",\r\n  \"name1\":\"Тестовый, ясен пень\",\r\n  \"surname1\":\"Санек\",\r\n  \"fathername1\":\"Красавчик\",\r\n  \"cat\":\"Маруся\",\r\n  \"dog\":\"Ушастый\",\r\n  \"parrot\":\"Васька\",\r\n  \"cavy\":\"Кто ты?\",\r\n  \"hamster\":\"Хомяк\",\r\n  \"squirrel\":\"Белая горячка к нам пришла\",\r\n  \"phone\":\"333 33 33\",\r\n  \"inn\":\"123456789012\",\r\n  \"gender\":\"m\",\r\n  \"birthday\":\"01.01.1900\",\r\n  \"date_start\":\"11.11.2000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://users.bugred.ru/tasks/rest/createuser",
+					"protocol": "http",
+					"host": [
+						"users",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"tasks",
+						"rest",
+						"createuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Саня создал компанию",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5d72052c-8f7d-4477-81f2-ac290ebc566a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_name\": \"Алкоголики и тунеядцы\",\r\n  \"company_type\": \"ООО\",\r\n  \"company_users\": [\"suoeremail@mail.ru\"],\r\n  \"email_owner\": \"{{Email}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://users.bugred.ru/tasks/rest/createcompany",
+					"protocol": "http",
+					"host": [
+						"users",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"tasks",
+						"rest",
+						"createcompany"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Делаем Авку САНЕ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b1474c56-b72b-4c07-9a5b-4f6e7755b5aa",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "{{Email}}",
+							"type": "text"
+						},
+						{
+							"key": "avatar",
+							"type": "file",
+							"src": "/D:/space gray/рабочий стол/с компа/фото/фоточки/_RdRRRgo1Uk.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://users.bugred.ru/tasks/rest/addavatar",
+					"protocol": "http",
+					"host": [
+						"users",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"tasks",
+						"rest",
+						"addavatar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Санек ищет друзей!",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "62fbfa01-d125-42b9-839a-2ad03db2ef4e",
+						"exec": [
+							"pm.test('Check status code', () => {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 230, 231, 232])\r",
+							"})\r",
+							"var data = JSON.parse(responseBody);\r",
+							"tests[\"Response type is ok\"] = data.foundCount == \"1\";"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json, application/xml, form-data",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"query\":\"{{Email}}\",\r\n\"party_type\":\"USER\"\r\n}"
+				},
+				"url": {
+					"raw": "http://users.bugred.ru/tasks/rest/magicsearch",
+					"protocol": "http",
+					"host": [
+						"users",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"tasks",
+						"rest",
+						"magicsearch"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
