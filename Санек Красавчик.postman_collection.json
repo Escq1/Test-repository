@@ -23,11 +23,7 @@
 					"script": {
 						"id": "dac772be-4dd5-4ac8-b83f-f6e3775e30b8",
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"var data = JSON.parse(responseBody);",
-							"tests[\"Response type is ok\"] = data.type == \"ok\";"
+							""
 						],
 						"type": "text/javascript"
 					}
