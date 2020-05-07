@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "920a79c1-09d9-454f-b26a-eb87a2e2279e",
+		"name": "Animals",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Запросы",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создаем питомца",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n \t\"Type\":\"Cat\",\n \t\"in\": \"body\",\n    \"name\": \"Tom\",\n    \"description\": \"Cat\",\n    \"required\": true,\n    \"schema\": {\n     \"$ref\": \"#/definitions/Pet\"\n            }\n }\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://petstore.swagger.io/v2/pet/",
+					"protocol": "http",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ищем питомца",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://petstore.swagger.io/v2/pet/5858867479466055315",
+					"protocol": "http",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"5858867479466055315"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Добавляем каритнку питомцу",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "image",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/D:/space gray/рабочий стол/с компа/фото/фоточки/images (1).jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://petstore.swagger.io/v2/pet/5858867479466055315/uploadImage",
+					"protocol": "http",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"5858867479466055315",
+						"uploadImage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ищем заказ ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://petstore.swagger.io/v2/store/order/9932643",
+					"protocol": "http",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order",
+						"9932643"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
