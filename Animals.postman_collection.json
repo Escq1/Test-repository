@@ -6,17 +6,6 @@
 	},
 	"item": [
 		{
-			"name": "Запросы",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Создаем питомца",
 			"event": [
 				{
@@ -27,7 +16,11 @@
 							"var responseText = pm.response.text();",
 							"const regex = /\\d+/;",
 							"const found = responseText.match(regex);",
-							"pm.environment.set(\"animal\", found[0]);"
+							"pm.environment.set(\"animal_id\", found[0]);",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -38,7 +31,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": " {\n \t\"Type\":\"Cat\",\n \t\"in\": \"body\",\n    \"name\": \"Momas\",\n    \"description\": \"Cat\",\n    \"required\": true,\n    \"schema\": {\n     \"$ref\": \"#/definitions/Pet\"\n            }\n }\n",
+					"raw": " {\n \t\"Type\":\"Dog\",\n \t\"in\": \"body\",\n    \"name\": \"Bomas\",\n    \"description\": \"Dog\",\n    \"required\": true,\n    \"schema\": {\n     \"$ref\": \"#/definitions/Pet\"\n            }\n }\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -46,15 +39,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://petstore.swagger.io/v2/pet/",
-					"protocol": "http",
+					"raw": "{{Url}}/pet/",
 					"host": [
-						"petstore",
-						"swagger",
-						"io"
+						"{{Url}}"
 					],
 					"path": [
-						"v2",
 						"pet",
 						""
 					]
@@ -64,21 +53,31 @@
 		},
 		{
 			"name": "Ищем питомца",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "14ccfe60-a738-458c-9ddd-e1d81c65a8e2",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://petstore.swagger.io/v2/pet/5858867479466055315",
-					"protocol": "http",
+					"raw": "{{Url}}/pet/{{animal_id}}",
 					"host": [
-						"petstore",
-						"swagger",
-						"io"
+						"{{Url}}"
 					],
 					"path": [
-						"v2",
 						"pet",
-						"5858867479466055315"
+						"{{animal_id}}"
 					]
 				}
 			},
@@ -86,6 +85,20 @@
 		},
 		{
 			"name": "Добавляем каритнку питомцу",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "118a5e6c-2f49-4f0f-ba69-e2928ab2800c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -106,17 +119,13 @@
 					]
 				},
 				"url": {
-					"raw": "http://petstore.swagger.io/v2/pet/5858867479466055315/uploadImage",
-					"protocol": "http",
+					"raw": "{{Url}}/pet/{{animal_id}}/uploadImage",
 					"host": [
-						"petstore",
-						"swagger",
-						"io"
+						"{{Url}}"
 					],
 					"path": [
-						"v2",
 						"pet",
-						"5858867479466055315",
+						"{{animal_id}}",
 						"uploadImage"
 					]
 				}
@@ -124,59 +133,31 @@
 			"response": []
 		},
 		{
-			"name": "Ищем заказ ",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://petstore.swagger.io/v2/store/order/9932643",
-					"protocol": "http",
-					"host": [
-						"petstore",
-						"swagger",
-						"io"
-					],
-					"path": [
-						"v2",
-						"store",
-						"order",
-						"9932643"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "удаляем заказ",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://petstore.swagger.io/v2/store/order/176636390",
-					"protocol": "http",
-					"host": [
-						"petstore",
-						"swagger",
-						"io"
-					],
-					"path": [
-						"v2",
-						"store",
-						"order",
-						"176636390"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Делаем заказ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "70577506-4960-46b5-bc24-046ceb5a9ebe",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"order_id\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"id\": 0,\r\n  \"petId\": 5858867479466055315,\r\n  \"quantity\": 0,\r\n  \"shipDate\": \"2020-05-07T12:14:11.002Z\",\r\n  \"status\": \"placed\",\r\n  \"complete\": true\r\n}",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"petId\": {{animal_id}},\r\n  \"quantity\": 0,\r\n  \"shipDate\": \"2020-05-07T12:14:11.002Z\",\r\n  \"status\": \"placed\",\r\n  \"complete\": true\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -184,17 +165,176 @@
 					}
 				},
 				"url": {
-					"raw": "http://petstore.swagger.io/v2/store/order",
-					"protocol": "http",
+					"raw": "{{Url}}/store/order",
 					"host": [
-						"petstore",
-						"swagger",
-						"io"
+						"{{Url}}"
 					],
 					"path": [
-						"v2",
 						"store",
 						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ищем заказ ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3d569a4d-3824-4ee5-a80b-7bcd9acb682d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Url}}/store/order/{{order_id}}",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"store",
+						"order",
+						"{{order_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "удаляем заказ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "34613cc8-81c6-46b8-ae6d-54ae4ad77ce8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Url}}/store/order/{{order_id}}",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"store",
+						"order",
+						"{{order_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Проверяем что заказ удален",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "099533ad-c04a-4264-924f-ce70142274db",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Url}}/store/order/{{order_id}}",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"store",
+						"order",
+						"{{order_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Удаляем питомца",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d4017d04-145f-48c2-a148-239341ec3a83",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Url}}/pet/{{animal_id}}",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"pet",
+						"{{animal_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Проверяем что питомец удален",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a33c3a1d-e606-4213-8697-b9702aed1ef9",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Url}}/pet/{{animal_id}}",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"pet",
+						"{{animal_id}}"
 					]
 				}
 			},
