@@ -18,12 +18,27 @@
 		},
 		{
 			"name": "Создаем питомца",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0fc01c03-bb02-480e-9e06-23cbf5b87859",
+						"exec": [
+							"var responseText = pm.response.text();",
+							"const regex = /\\d+/;",
+							"const found = responseText.match(regex);",
+							"pm.environment.set(\"animal\", found[0]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": " {\n \t\"Type\":\"Cat\",\n \t\"in\": \"body\",\n    \"name\": \"Tom\",\n    \"description\": \"Cat\",\n    \"required\": true,\n    \"schema\": {\n     \"$ref\": \"#/definitions/Pet\"\n            }\n }\n",
+					"raw": " {\n \t\"Type\":\"Cat\",\n \t\"in\": \"body\",\n    \"name\": \"Momas\",\n    \"description\": \"Cat\",\n    \"required\": true,\n    \"schema\": {\n     \"$ref\": \"#/definitions/Pet\"\n            }\n }\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -149,6 +164,37 @@
 						"store",
 						"order",
 						"176636390"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Делаем заказ",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"petId\": 5858867479466055315,\r\n  \"quantity\": 0,\r\n  \"shipDate\": \"2020-05-07T12:14:11.002Z\",\r\n  \"status\": \"placed\",\r\n  \"complete\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://petstore.swagger.io/v2/store/order",
+					"protocol": "http",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order"
 					]
 				}
 			},
