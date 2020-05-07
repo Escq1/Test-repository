@@ -130,6 +130,29 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "удаляем заказ",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://petstore.swagger.io/v2/store/order/176636390",
+					"protocol": "http",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order",
+						"176636390"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}
